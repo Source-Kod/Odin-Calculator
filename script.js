@@ -1,7 +1,3 @@
-// globals
-let current_number = "";
-
-
 function add(num1, num2) {
   return num1 + num2;
 }
@@ -34,6 +30,8 @@ function operate(operator, num1, num2) {
 }
 
 function createButtonEvents() {
+  let displayed_numbers = "";
+
   // numbers
   const n0 = document.querySelector('#n0');
   const n1 = document.querySelector('#n1');
@@ -55,30 +53,30 @@ function createButtonEvents() {
 
   // numbers
   n0.addEventListener('click', () => {
-    current_number += "0";
-    updateDisplay();
+    displayed_numbers += "0";
+    updateDisplay(displayed_numbers);
   });
 
   n1.addEventListener('click', () => {
-    current_number += "1";
-    updateDisplay();
+    displayed_numbers += "1";
+    updateDisplay(displayed_numbers);
   });
 
   n2.addEventListener('click', () => {
-    current_number += "2";
-    updateDisplay();
+    displayed_numbers += "2";
+    updateDisplay(displayed_numbers);
   });
 
   //operations
   op1.addEventListener('click', () => {
-    current_number += "+";
-    updateDisplay();
+    displayed_numbers += "+";
+    updateDisplay(displayed_numbers);
   });
 
   op5.addEventListener('click', () => {
-    let array = current_number.split("")
-    if (array.includes(...['+','-','*','/'])) current_number = solveArray(array);
-    updateDisplay();
+    let array = displayed_numbers.split("")
+    if (array.includes(...['+','-','*','/'])) displayed_numbers = solveArray(array);
+    updateDisplay(displayed_numbers);
   });
 }
 
@@ -108,10 +106,10 @@ function solveArray(array) {
   return operate(op.toString(),parseInt(num1.join('')),parseInt(num2.join('')));
 }
 
-function updateDisplay() {
+function updateDisplay(displayed_numbers) {
   const display_text = document.querySelector('#display_text');
 
-  display_text.textContent = current_number;
+  display_text.textContent = displayed_numbers;
 }
 
 
