@@ -1,4 +1,38 @@
 /* Set the background color for the entire page */
 body {
   background-color: #282b36;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.calculator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 700px;
+  height: 700px;
+  border: 2px darkred solid;
+  margin-top: 20px;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  width: 80%;
+  height: 70%;
+  gap: 3px;
+  background-color: darkcyan;
+}
+
+.buttons button {
+  border-radius: 20px;
+  background-color: darkslategrey;
+}
+
+.display {
+  width: 80%;
+  height: 30%;
+}
+
