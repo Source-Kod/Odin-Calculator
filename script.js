@@ -34,11 +34,6 @@ function operate(operator, num1, num2) {
 }
 
 function createButtonEvents() {
-  let num1 = 0;
-  let num2 = 0;
-  let setNum1 = true;
-  let lastWasOp = false;
-
   // numbers
   const n0 = document.querySelector('#n0');
   const n1 = document.querySelector('#n1');
@@ -65,48 +60,52 @@ function createButtonEvents() {
   });
 
   n1.addEventListener('click', () => {
-    if (lastWasOp) current_number = "", lastWasOp = false;
     current_number += "1";
     updateDisplay();
   });
 
   n2.addEventListener('click', () => {
-    if (lastWasOp) current_number = "", lastWasOp = false;
     current_number += "2";
     updateDisplay();
   });
 
   //operations
   op1.addEventListener('click', () => {
-    if (!setNum1) {
-      console.log('false')
-      num2 = parseInt(current_number);
-      current_number = operate("+",num1,num2).toString();
-      num1 = parseInt(current_number);
-      updateDisplay();
-    }
-    if (setNum1) {
-      console.log('true')
-      num1 = parseInt(current_number);
-      current_number = "";
-      updateDisplay();
-      setNum1 = false;
-    }
-
-    lastWasOp = true;
+    current_number += "+";
+    updateDisplay();
   });
 
   op5.addEventListener('click', () => {
-    if (!checkIfNum1(num1)) {
-      num2 = parseInt(current_number);
-      current_number = operate("+",num1,num2);
-      updateDisplay();
-    }
+    let array = current_number.split("")
+    if (array.includes(...['+','-','*','/'])) current_number = solveArray(array);
+    updateDisplay();
   });
 }
 
-function checkIfNum1(num1) {
-  return num1 === 0;
+function solveArray(array) {
+  let num1 = [];
+  let num2 = [];
+  let op = "";
+  let num1Completed = false;
+
+  array.forEach(e => {
+    if (e != '+' && e != '-' && e != '*' && e != '/') {
+      if (!num1Completed) num1.push(e);
+      if (num1Completed) num2.push(e);
+    }
+
+    if (e === '+' || e === '-' || e === '*' || e === '/') {
+      // if e is +-*/ and op != "" the solve and set as num1? this may work using the num1Completed instead?
+      if (num1Completed){
+        num1 = operate(op.toString(),parseInt(num1.join('')),parseInt(num2.join(''))).toString().split('');
+        num2 = [];
+      }
+      op = e;
+      num1Completed = true;
+    }
+  });
+
+  return operate(op.toString(),parseInt(num1.join('')),parseInt(num2.join('')));
 }
 
 function updateDisplay() {
