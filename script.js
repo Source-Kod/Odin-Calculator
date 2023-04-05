@@ -95,7 +95,7 @@ function solveArray(array) {
     if (e === '+' || e === '-' || e === '*' || e === '/') {
       // if e is +-*/ and op != "" the solve and set as num1? this may work using the num1Completed instead?
       if (num1Completed){
-        num1 = operate(op.toString(),parseInt(num1.join('')),parseInt(num2.join(''))).toString().split('');
+        num1 = operate(op,parseInt(num1.join('')),parseInt(num2.join(''))).toString().split('');
         num2 = [];
       }
       op = e;
@@ -103,7 +103,7 @@ function solveArray(array) {
     }
   });
 
-  return operate(op.toString(),parseInt(num1.join('')),parseInt(num2.join('')));
+  return operate(op,parseInt(num1.join('')),parseInt(num2.join('')));
 }
 
 function updateDisplay(displayed_numbers) {
