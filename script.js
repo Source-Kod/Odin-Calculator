@@ -31,6 +31,7 @@ function operate(operator, num1, num2) {
 
 function createButtonEvents() {
   let displayed_numbers = "";
+  let clearOnInput = false;
 
   // numbers
   const n0 = document.querySelector('#n0');
@@ -53,22 +54,29 @@ function createButtonEvents() {
 
   // numbers
   n0.addEventListener('click', () => {
+    if (clearOnInput) displayed_numbers = "", updateDisplay(displayed_numbers);
+    clearOnInput = false;
     displayed_numbers += "0";
     updateDisplay(displayed_numbers);
   });
 
   n1.addEventListener('click', () => {
+    if (clearOnInput) displayed_numbers = "", updateDisplay(displayed_numbers);
+    clearOnInput = false;
     displayed_numbers += "1";
     updateDisplay(displayed_numbers);
   });
 
   n2.addEventListener('click', () => {
+    if (clearOnInput) displayed_numbers = "", updateDisplay(displayed_numbers);
+    clearOnInput = false;
     displayed_numbers += "2";
     updateDisplay(displayed_numbers);
   });
 
   //operations
   op1.addEventListener('click', () => {
+    clearOnInput = false;
     displayed_numbers += "+";
     updateDisplay(displayed_numbers);
   });
@@ -77,6 +85,7 @@ function createButtonEvents() {
     let array = displayed_numbers.split("")
     if (array.includes(...['+','-','*','/'])) displayed_numbers = solveArray(array);
     updateDisplay(displayed_numbers);
+    clearOnInput = true;
   });
 }
 
