@@ -30,7 +30,7 @@ function operate(operator, num1, num2) {
 }
 
 function createButtonEvents() {
-  let displayed_numbers = "";
+  let displayedNumbers = "";
   let clearOnInput = false;
 
   // numbers
@@ -54,68 +54,80 @@ function createButtonEvents() {
 
   // numbers
   n0.addEventListener('click', () => {
-    if (clearOnInput) displayed_numbers = "", updateDisplay(displayed_numbers);
+    if (clearOnInput) displayedNumbers = "", updateDisplay(displayedNumbers);
     clearOnInput = false;
-    displayed_numbers += "0";
-    updateDisplay(displayed_numbers);
+    displayedNumbers += "0";
+    updateDisplay(displayedNumbers);
   });
 
   n1.addEventListener('click', () => {
-    if (clearOnInput) displayed_numbers = "", updateDisplay(displayed_numbers);
+    if (clearOnInput) displayedNumbers = "", updateDisplay(displayedNumbers);
     clearOnInput = false;
-    displayed_numbers += "1";
-    updateDisplay(displayed_numbers);
+    displayedNumbers += "1";
+    updateDisplay(displayedNumbers);
   });
 
   n2.addEventListener('click', () => {
-    if (clearOnInput) displayed_numbers = "", updateDisplay(displayed_numbers);
+    if (clearOnInput) displayedNumbers = "", updateDisplay(displayedNumbers);
     clearOnInput = false;
-    displayed_numbers += "2";
-    updateDisplay(displayed_numbers);
+    displayedNumbers += "2";
+    updateDisplay(displayedNumbers);
   });
 
   //operations
   op1.addEventListener('click', () => {
     clearOnInput = false;
-    displayed_numbers += "+";
-    updateDisplay(displayed_numbers);
+    displayedNumbers += "+";
+    updateDisplay(displayedNumbers);
   });
 
   op5.addEventListener('click', () => {
-    let array = displayed_numbers.split("");
-    if (array.includes(...['+','-','*','/'])) displayed_numbers = solveArray(array);
-    updateDisplay(displayed_numbers);
-    clearOnInput = true;
+    let array = displayedNumbers.split("");
+    let arrayLast = array[array.length - 1];
+
+    if (array.includes(...['+','-','*','/'])) {
+      if (arrayLast != '+' && arrayLast != '-' && arrayLast != '*' && arrayLast != '/') {
+        displayedNumbers = solveArray(array);
+        updateDisplay(displayedNumbers);
+        clearOnInput = true;
+      }
+    } 
   });
 
   // Keyboard event
   document.addEventListener('keydown', (key) => {
     if (key.key === '1') {
-      if (clearOnInput) displayed_numbers = "", updateDisplay(displayed_numbers);
+      if (clearOnInput) displayedNumbers = "", updateDisplay(displayedNumbers);
       clearOnInput = false;
-      displayed_numbers += "1";
-      updateDisplay(displayed_numbers);
+      displayedNumbers += "1";
+      updateDisplay(displayedNumbers);
     }
 
     if (key.key === '2') {
-      if (clearOnInput) displayed_numbers = "", updateDisplay(displayed_numbers);
+      if (clearOnInput) displayedNumbers = "", updateDisplay(displayedNumbers);
       clearOnInput = false;
-      displayed_numbers += "2";
-      updateDisplay(displayed_numbers);
+      displayedNumbers += "2";
+      updateDisplay(displayedNumbers);
     }
 
     if (key.key === '+') {
       clearOnInput = false;
-      displayed_numbers += "+";
-      updateDisplay(displayed_numbers);
+      displayedNumbers += "+";
+      updateDisplay(displayedNumbers);
     }
     
     if (key.key === 'Enter') {
       key.preventDefault();
-      let array = displayed_numbers.split("");
-      if (array.includes(...['+','-','*','/'])) displayed_numbers = solveArray(array);
-      updateDisplay(displayed_numbers);
-      clearOnInput = true;
+      let array = displayedNumbers.split("");
+      let arrayLast = array[array.length - 1];
+
+      if (array.includes(...['+','-','*','/'])) {
+        if (arrayLast != '+' && arrayLast != '-' && arrayLast != '*' && arrayLast != '/') {
+          displayedNumbers = solveArray(array);
+          updateDisplay(displayedNumbers);
+          clearOnInput = true;
+        }
+      } 
     }
 
     if (key.key === ' ') {
@@ -137,7 +149,6 @@ function solveArray(array) {
     }
 
     if (e === '+' || e === '-' || e === '*' || e === '/') {
-      // if e is +-*/ and op != "" the solve and set as num1? this may work using the num1Completed instead?
       if (num1Completed){
         num1 = operate(op,parseInt(num1.join('')),parseInt(num2.join(''))).toString().split('');
         num2 = [];
@@ -150,10 +161,10 @@ function solveArray(array) {
   return operate(op,parseInt(num1.join('')),parseInt(num2.join('')));
 }
 
-function updateDisplay(displayed_numbers) {
+function updateDisplay(displayedNumbers) {
   const display_text = document.querySelector('#display_text');
 
-  display_text.textContent = displayed_numbers;
+  display_text.textContent = displayedNumbers;
 }
 
 
