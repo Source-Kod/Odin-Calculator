@@ -82,11 +82,46 @@ function createButtonEvents() {
   });
 
   op5.addEventListener('click', () => {
-    let array = displayed_numbers.split("")
+    let array = displayed_numbers.split("");
     if (array.includes(...['+','-','*','/'])) displayed_numbers = solveArray(array);
     updateDisplay(displayed_numbers);
     clearOnInput = true;
   });
+
+  // Keyboard event
+  document.addEventListener('keydown', (key) => {
+    if (key.key === '1') {
+      if (clearOnInput) displayed_numbers = "", updateDisplay(displayed_numbers);
+      clearOnInput = false;
+      displayed_numbers += "1";
+      updateDisplay(displayed_numbers);
+    }
+
+    if (key.key === '2') {
+      if (clearOnInput) displayed_numbers = "", updateDisplay(displayed_numbers);
+      clearOnInput = false;
+      displayed_numbers += "2";
+      updateDisplay(displayed_numbers);
+    }
+
+    if (key.key === '+') {
+      clearOnInput = false;
+      displayed_numbers += "+";
+      updateDisplay(displayed_numbers);
+    }
+    
+    if (key.key === 'Enter') {
+      key.preventDefault();
+      let array = displayed_numbers.split("");
+      if (array.includes(...['+','-','*','/'])) displayed_numbers = solveArray(array);
+      updateDisplay(displayed_numbers);
+      clearOnInput = true;
+    }
+
+    if (key.key === ' ') {
+      key.preventDefault();
+    }
+  })
 }
 
 function solveArray(array) {
