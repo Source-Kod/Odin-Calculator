@@ -56,31 +56,19 @@ function createButtonEvents() {
 
   // numbers
   n0.addEventListener('click', () => {
-    if (clearOnInput) displayedNumbers = "", updateDisplay(displayedNumbers);
-    clearOnInput = false;
-    displayedNumbers += "0";
-    updateDisplay(displayedNumbers);
+    ({displayedNumbers, clearOnInput} = handleNumberClicks(displayedNumbers, clearOnInput, "0"));
   });
 
   n1.addEventListener('click', () => {
-    if (clearOnInput) displayedNumbers = "", updateDisplay(displayedNumbers);
-    clearOnInput = false;
-    displayedNumbers += "1";
-    updateDisplay(displayedNumbers);
+    ({displayedNumbers, clearOnInput} = handleNumberClicks(displayedNumbers, clearOnInput, "1"));
   });
 
   n2.addEventListener('click', () => {
-    if (clearOnInput) displayedNumbers = "", updateDisplay(displayedNumbers);
-    clearOnInput = false;
-    displayedNumbers += "2";
-    updateDisplay(displayedNumbers);
+    ({displayedNumbers, clearOnInput} = handleNumberClicks(displayedNumbers, clearOnInput, "2"));
   });
 
   n3.addEventListener('click', () => {
-    if (clearOnInput) displayedNumbers = "", updateDisplay(displayedNumbers);
-    clearOnInput = false;
-    displayedNumbers += "3";
-    updateDisplay(displayedNumbers);
+    ({displayedNumbers, clearOnInput} = handleNumberClicks(displayedNumbers, clearOnInput, "3"));
   });
 
   //operations
@@ -164,6 +152,14 @@ function solveArray(array) {
   });
 
   return operate(op,parseInt(num1.join('')),parseInt(num2.join('')));
+}
+
+function handleNumberClicks(displayedNumbers, clearOnInput, number) {
+  if (clearOnInput) displayedNumbers = "", clearOnInput = false;
+
+  displayedNumbers += number;
+  updateDisplay(displayedNumbers);
+  return {displayedNumbers, clearOnInput};
 }
 
 function updateDisplay(displayedNumbers) {
