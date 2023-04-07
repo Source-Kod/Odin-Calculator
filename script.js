@@ -53,6 +53,7 @@ function createButtonEvents() {
   const op4 = document.querySelector('#op4');
   const op5 = document.querySelector('#op5');
   const opClear = document.querySelector('#opClear');
+  const opBackspace = document.querySelector('#opBackspace');
 
   // numbers
   n0.addEventListener('click', () => {
@@ -95,6 +96,10 @@ function createButtonEvents() {
     ({displayedNumbers, clearOnInput} = handleNumberClicks(displayedNumbers, clearOnInput, "9"));
   });
 
+  nDot.addEventListener('click', () => {
+    ({displayedNumbers, clearOnInput} = handleNumberClicks(displayedNumbers, clearOnInput, "."));
+  })
+
   //operations
   op1.addEventListener('click', () => {
     clearOnInput = false;
@@ -119,6 +124,11 @@ function createButtonEvents() {
     displayedNumbers = "";
     updateDisplay(displayedNumbers);
     clearOnInput = false;
+  })
+
+  opBackspace.addEventListener('click', () => {
+    displayedNumbers = displayedNumbers.slice(0, -1);
+    updateDisplay(displayedNumbers);
   })
 
   // Keyboard event
@@ -169,6 +179,10 @@ function createButtonEvents() {
 
     if (key.key === 'Escape') {
       opClear.click();
+    }
+
+    if (key.key === 'Backspace') {
+      opBackspace.click();
     }
 
     if (key.key === ' ') {
