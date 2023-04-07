@@ -44,6 +44,7 @@ function createButtonEvents() {
   const n7 = document.querySelector('#n7');
   const n8 = document.querySelector('#n8');
   const n9 = document.querySelector('#n9');
+  const nDot = document.querySelector('#nDot');
 
   // operation buttons
   const op1 = document.querySelector('#op1');
@@ -51,6 +52,7 @@ function createButtonEvents() {
   const op3 = document.querySelector('#op3');
   const op4 = document.querySelector('#op4');
   const op5 = document.querySelector('#op5');
+  const opClear = document.querySelector('#opClear');
 
   // numbers
   n0.addEventListener('click', () => {
@@ -74,6 +76,13 @@ function createButtonEvents() {
     updateDisplay(displayedNumbers);
   });
 
+  n3.addEventListener('click', () => {
+    if (clearOnInput) displayedNumbers = "", updateDisplay(displayedNumbers);
+    clearOnInput = false;
+    displayedNumbers += "3";
+    updateDisplay(displayedNumbers);
+  });
+
   //operations
   op1.addEventListener('click', () => {
     clearOnInput = false;
@@ -94,40 +103,36 @@ function createButtonEvents() {
     } 
   });
 
+  opClear.addEventListener('click', () => {
+    displayedNumbers = "";
+    updateDisplay(displayedNumbers);
+    clearOnInput = false;
+  })
+
   // Keyboard event
   document.addEventListener('keydown', (key) => {
     if (key.key === '1') {
-      if (clearOnInput) displayedNumbers = "", updateDisplay(displayedNumbers);
-      clearOnInput = false;
-      displayedNumbers += "1";
-      updateDisplay(displayedNumbers);
+      n1.click();
     }
 
     if (key.key === '2') {
-      if (clearOnInput) displayedNumbers = "", updateDisplay(displayedNumbers);
-      clearOnInput = false;
-      displayedNumbers += "2";
-      updateDisplay(displayedNumbers);
+      n2.click();
+    }
+
+    if (key.key === '3') {
+      n3.click();
     }
 
     if (key.key === '+') {
-      clearOnInput = false;
-      displayedNumbers += "+";
-      updateDisplay(displayedNumbers);
+      op1.click();
     }
     
     if (key.key === 'Enter') {
-      key.preventDefault();
-      let array = displayedNumbers.split("");
-      let arrayLast = array[array.length - 1];
+      op5.click();
+    }
 
-      if (array.includes(...['+','-','*','/'])) {
-        if (arrayLast != '+' && arrayLast != '-' && arrayLast != '*' && arrayLast != '/') {
-          displayedNumbers = solveArray(array);
-          updateDisplay(displayedNumbers);
-          clearOnInput = true;
-        }
-      } 
+    if (key.key === 'Escape') {
+      opClear.click();
     }
 
     if (key.key === ' ') {
