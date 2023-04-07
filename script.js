@@ -71,6 +71,30 @@ function createButtonEvents() {
     ({displayedNumbers, clearOnInput} = handleNumberClicks(displayedNumbers, clearOnInput, "3"));
   });
 
+  n4.addEventListener('click', () => {
+    ({displayedNumbers, clearOnInput} = handleNumberClicks(displayedNumbers, clearOnInput, "4"));
+  });
+
+  n5.addEventListener('click', () => {
+    ({displayedNumbers, clearOnInput} = handleNumberClicks(displayedNumbers, clearOnInput, "5"));
+  });
+
+  n6.addEventListener('click', () => {
+    ({displayedNumbers, clearOnInput} = handleNumberClicks(displayedNumbers, clearOnInput, "6"));
+  });
+
+  n7.addEventListener('click', () => {
+    ({displayedNumbers, clearOnInput} = handleNumberClicks(displayedNumbers, clearOnInput, "7"));
+  });
+
+  n8.addEventListener('click', () => {
+    ({displayedNumbers, clearOnInput} = handleNumberClicks(displayedNumbers, clearOnInput, "8"));
+  });
+
+  n9.addEventListener('click', () => {
+    ({displayedNumbers, clearOnInput} = handleNumberClicks(displayedNumbers, clearOnInput, "9"));
+  });
+
   //operations
   op1.addEventListener('click', () => {
     clearOnInput = false;
@@ -109,6 +133,30 @@ function createButtonEvents() {
 
     if (key.key === '3') {
       n3.click();
+    }
+
+    if (key.key === '4') {
+      n4.click();
+    }
+
+    if (key.key === '5') {
+      n5.click();
+    }
+
+    if (key.key === '6') {
+      n6.click();
+    }
+
+    if (key.key === '7') {
+      n7.click();
+    }
+    
+    if (key.key === '8') {
+      n8.click();
+    }
+
+    if (key.key === '9') {
+      n9.click();
     }
 
     if (key.key === '+') {
