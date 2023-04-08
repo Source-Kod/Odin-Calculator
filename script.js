@@ -127,9 +127,8 @@ function createButtonEvents() {
 
   op5.addEventListener('click', () => {
     let array = displayedNumbers.split("");
-    let arrayLast = array[array.length - 1];
 
-    if ((array.includes('+') || array.includes('-') || array.includes('*') || array.includes('/')) && (arrayLast != '+' && arrayLast != '-' && arrayLast != '*' && arrayLast != '/')) { 
+    if (checkIfArrayIsValid(array)) { 
       displayedNumbers = solveArray(array);
       updateDisplay(displayedNumbers);
       clearOnInput = true;
@@ -189,10 +188,6 @@ function createButtonEvents() {
       n9.click();
     }
 
-    if (key.key === '9') {
-      n9.click();
-    }
-
     if (key.key === '.') {
       nDot.click();
     }
@@ -237,18 +232,21 @@ function solveArray(array) {
   let op = "";
   let num1Completed = false;
 
-  array.forEach(e => {
-    if (e != '+' && e != '-' && e != '*' && e != '/') {
-      if (!num1Completed) num1.push(e);
-      if (num1Completed) num2.push(e);
+  array.forEach((element, index) => {
+    if (element != '+' && element != '-' && element != '*' && element != '/') {
+      if (!num1Completed) num1.push(element);
+      if (num1Completed) num2.push(element);
     }
 
-    if (e === '+' || e === '-' || e === '*' || e === '/') {
-      if (num1Completed){
-        num1 = operate(op,parseInt(num1.join('')),parseInt(num2.join(''))).toString().split('');
-        num2 = [];
-      }
-      op = e;
+    if (element === '+' || element === '-' || element === '*' || element === '/') {
+      if (element === '-' && element === array[index - 1]) {
+        if (!num1Completed) num1.push(element);
+        if (num1Completed) num2.push(element);
+      } else if (num1Completed){
+          num1 = operate(op,parseInt(num1.join('')),parseInt(num2.join(''))).toString().split('');
+          num2 = [];
+        }
+      op = element;
       num1Completed = true;
     }
   });
@@ -268,6 +266,13 @@ function updateDisplay(displayedNumbers) {
   const display_text = document.querySelector('#display_text');
 
   display_text.textContent = displayedNumbers;
+}
+
+function checkIfArrayIsValid(array) {
+  let arrayLast = array[array.length - 1];
+
+  return ((array.includes('+') || array.includes('-') || array.includes('*') || array.includes('/')) && (arrayLast != '+' && arrayLast != '-' && arrayLast != '*' && arrayLast != '/'));
+
 }
 
 
