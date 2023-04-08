@@ -149,6 +149,10 @@ function createButtonEvents() {
 
   // Keyboard event
   document.addEventListener('keydown', (key) => {
+    if (key.key === '0') {
+      n0.click();
+    }
+
     if (key.key === '1') {
       n1.click();
     }
@@ -183,6 +187,14 @@ function createButtonEvents() {
 
     if (key.key === '9') {
       n9.click();
+    }
+
+    if (key.key === '9') {
+      n9.click();
+    }
+
+    if (key.key === '.') {
+      nDot.click();
     }
 
     if (key.key === '+') {
