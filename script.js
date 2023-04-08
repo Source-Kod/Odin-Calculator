@@ -233,19 +233,16 @@ function solveArray(array) {
   let num1Completed = false;
 
   array.forEach((element, index) => {
-    if (element != '+' && element != '-' && element != '*' && element != '/') {
+    if ((element != '+' && element != '-' && element != '*' && element != '/') || (element === '-' && element === array[index - 1])) {
       if (!num1Completed) num1.push(element);
       if (num1Completed) num2.push(element);
     }
 
-    if (element === '+' || element === '-' || element === '*' || element === '/') {
-      if (element === '-' && element === array[index - 1]) {
-        if (!num1Completed) num1.push(element);
-        if (num1Completed) num2.push(element);
-      } else if (num1Completed){
-          num1 = operate(op,parseInt(num1.join('')),parseInt(num2.join(''))).toString().split('');
-          num2 = [];
-        }
+    if ((element === '+' || element === '-' || element === '*' || element === '/') && !(element === array[index - 1])) {
+      if (num1Completed){
+        num1 = operate(op,parseInt(num1.join('')),parseInt(num2.join(''))).toString().split('');
+        num2 = [];
+      }
       op = element;
       num1Completed = true;
     }
