@@ -243,7 +243,7 @@ function solveArray(array) {
       if (element === '+' && array[index + 1] === '-') return;
 
       if (num1Completed){
-        num1 = operate(op,parseInt(num1.join('')),parseInt(num2.join(''))).toString().split('');
+        num1 = operate(op,parseFloat(num1.join('')),parseFloat(num2.join(''))).toString().split('');
         num2 = [];
       }
       op = element;
@@ -251,7 +251,7 @@ function solveArray(array) {
     }
   });
 
-  return operate(op,parseInt(num1.join('')),parseInt(num2.join('')));
+  return operate(op,parseFloat(num1.join('')),parseFloat(num2.join('')));
 }
 
 function handleNumberClicks(displayedNumbers, clearOnInput, number) {
