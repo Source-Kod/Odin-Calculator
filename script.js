@@ -127,7 +127,7 @@ function createButtonEvents() {
   })
 
   opBackspace.addEventListener('click', () => {
-    displayedNumbers = displayedNumbers.slice(0, -1);
+    displayedNumbers = displayedNumbers.toString().slice(0, -1);
     updateDisplay(displayedNumbers);
   })
 
