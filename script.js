@@ -107,16 +107,32 @@ function createButtonEvents() {
     updateDisplay(displayedNumbers);
   });
 
+  op2.addEventListener('click', () => {
+    clearOnInput = false;
+    displayedNumbers += "-";
+    updateDisplay(displayedNumbers);
+  });
+
+  op3.addEventListener('click', () => {
+    clearOnInput = false;
+    displayedNumbers += "*";
+    updateDisplay(displayedNumbers);
+  });
+
+  op4.addEventListener('click', () => {
+    clearOnInput = false;
+    displayedNumbers += "/";
+    updateDisplay(displayedNumbers);
+  });
+
   op5.addEventListener('click', () => {
     let array = displayedNumbers.split("");
     let arrayLast = array[array.length - 1];
 
-    if (array.includes(...['+','-','*','/'])) {
-      if (arrayLast != '+' && arrayLast != '-' && arrayLast != '*' && arrayLast != '/') {
-        displayedNumbers = solveArray(array);
-        updateDisplay(displayedNumbers);
-        clearOnInput = true;
-      }
+    if ((array.includes('+') || array.includes('-') || array.includes('*') || array.includes('/')) && (arrayLast != '+' && arrayLast != '-' && arrayLast != '*' && arrayLast != '/')) { 
+      displayedNumbers = solveArray(array);
+      updateDisplay(displayedNumbers);
+      clearOnInput = true;
     } 
   });
 
@@ -171,6 +187,18 @@ function createButtonEvents() {
 
     if (key.key === '+') {
       op1.click();
+    }
+
+    if (key.key === '-') {
+      op2.click();
+    }
+
+    if (key.key === '*') {
+      op3.click();
+    }
+
+    if (key.key === '/') {
+      op4.click();
     }
     
     if (key.key === 'Enter') {
