@@ -233,12 +233,15 @@ function solveArray(array) {
   let num1Completed = false;
 
   array.forEach((element, index) => {
-    if ((element != '+' && element != '-' && element != '*' && element != '/') || (element === '-' && element === array[index - 1])) {
+    if ((element != '+' && element != '-' && element != '*' && element != '/') || (element === '-' && element === array[index - 1]) || (element === '-' && index === 0)) {
       if (!num1Completed) num1.push(element);
       if (num1Completed) num2.push(element);
     }
 
-    if ((element === '+' || element === '-' || element === '*' || element === '/') && !(element === array[index - 1])) {
+    if ((element === '+' || element === '-' || element === '*' || element === '/') && !(element === array[index - 1]) && !(index === 0)) {
+      // fix bug when adding a negative number. ex.10+-1. by just skipping the + and making it 10-1.
+      if (element === '+' && array[index + 1] === '-') return;
+
       if (num1Completed){
         num1 = operate(op,parseInt(num1.join('')),parseInt(num2.join(''))).toString().split('');
         num2 = [];
