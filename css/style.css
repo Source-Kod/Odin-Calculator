@@ -37,10 +37,18 @@ body {
   gap: 5px;
 }
 
+#op5 {
+  grid-column: span 2;
+}
+
 .buttons button {
   border-radius: 10px;
   border: none;
   color: linen;
+}
+
+.blank {
+  background-color: #4527a0;
 }
 
 .number {
@@ -62,5 +70,6 @@ body {
   height: 10%;
   background-color: #282b36;
   border-radius: 10px;
+  color: linen;
 }
 
