@@ -30,8 +30,9 @@ function operate(operator, num1, num2) {
 }
 
 function createButtonEvents() {
-  let displayedNumbers = "";
+  let displayedNumbers = '';
   let clearOnInput = false;
+  let saveDisplayedNumbersForHistory = '';
 
   // numbers
   const n0 = document.querySelector('#n0');
@@ -126,11 +127,13 @@ function createButtonEvents() {
   });
 
   op5.addEventListener('click', () => {
+    saveDisplayedNumbersForHistory = displayedNumbers;
     let array = displayedNumbers.split("");
 
     if (checkIfArrayIsValid(array)) { 
       displayedNumbers = solveArray(array);
       updateDisplay(displayedNumbers);
+      updateHistory(saveDisplayedNumbersForHistory, displayedNumbers);
       clearOnInput = true;
     } 
   });
@@ -273,6 +276,21 @@ function checkIfArrayIsValid(array) {
 
   return ((array.includes('+') || array.includes('-') || array.includes('*') || array.includes('/')) && (arrayLast != '+' && arrayLast != '-' && arrayLast != '*' && arrayLast != '/'));
 
+}
+
+function updateHistory(saveDisplayedNumbersForHistory, displayedNumbers) {
+  const history1 = document.querySelector('#history1');
+  const history2 = document.querySelector('#history2');
+  const history3 = document.querySelector('#history3');
+  const history4 = document.querySelector('#history4');
+  const history5 = document.querySelector('#history5');
+
+  history5.textContent = history4.textContent;
+  history4.textContent = history3.textContent;
+  history3.textContent = history2.textContent;
+  history2.textContent = history1.textContent;
+
+  history1.textContent = saveDisplayedNumbersForHistory + '  =  ' + displayedNumbers;
 }
 
 
